@@ -27,19 +27,40 @@ students = [
 ]
 
 def print_header
-	puts "The students of my cohort of Makers Academy"
-	puts "-------------"
+	print "The students of my cohort of Makers Academy\n"
+	print "-------------\n"
 end
 
-def print(students)
-	students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
+def print_out(students)
+	students.each_with_index { |student, index| print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)\n" }
 end
 
 def print_footer(students)
-	puts "-------------"
-	puts "Overall, we have #{students.length} great students"
+	print "-------------\n"
+	print "Overall, we have #{students.length} great students\n"
 end
 
-print_header
-print(students)
-print_footer(students)
+def print_a(students)
+	students.each { |student| 
+		if student[:name].start_with?('A')
+			puts "#{student[:name]}"
+		end	
+	}
+end
+
+def print_less_than_12(students)
+	students.each { |student| 
+		if student[:name].length < 12
+			puts "#{student[:name]}"
+		end
+	}
+end
+
+#print_header
+#print_out(students)
+#print_footer(students)
+#print_a(students)
+print_less_than_12(students)
+
+
+
