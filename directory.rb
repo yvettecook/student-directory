@@ -26,11 +26,20 @@ students = [
 	"Pablo",
 ]
 
-# printing the list
-puts "The students of my cohort of Makers Academy"
-puts "-------------"
-students.each { |name| puts name }
+def print_header
+	puts "The students of my cohort of Makers Academy"
+	puts "-------------"
+end
 
-puts "-------------"
-#finally, we print the total
-puts "Overall, we have #{students.length} great students"
+def print(students)
+	students.each { |name| puts name }
+end
+
+def print_footer(students)
+	puts "-------------"
+	puts "Overall, we have #{students.length} great students"
+end
+
+print_header
+print(students)
+print_footer(students)
