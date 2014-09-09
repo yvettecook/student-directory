@@ -18,20 +18,20 @@ def input_students
 end
 
 def print_header
-	puts "The students of my cohort of Makers Academy"
-	puts "-------------"
+	print "The students of my cohort of Makers Academy\n"
+	print "-------------\n"
 end
 
-def print(students)
-	students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
+def print_out(students)
+	students.each { |student| print "#{student[:name]} (#{student[:cohort]} cohort)\n" }
 end
 
 def print_footer(students)
-	puts "-------------"
-	puts "Overall, we have #{students.length} great students"
+	print "-------------\n"
+	print "Overall, we have #{students.length} great students\n"
 end
 
 students = input_students
 print_header
-print(students)
+print_out(students)
 print_footer(students)
