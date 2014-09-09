@@ -24,3 +24,7 @@ puts "Sandrine"
 puts "Craig H" 
 puts "Vic"
 puts "Pablo"
+puts "-------------"
+print "Overall, we have "
+print 23
+puts " great students"
