@@ -1,5 +1,3 @@
-student_count =23
-
 # putting in an array
 students = [
 	"Nicole Pell",
@@ -35,4 +33,4 @@ students.each { |name| puts name }
 
 puts "-------------"
 #finally, we print the total
-puts "Overall, we have #{student_count} great students"
+puts "Overall, we have #{students.length} great students"
