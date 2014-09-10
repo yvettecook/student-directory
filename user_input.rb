@@ -8,9 +8,12 @@ def input_students
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student has to the array
+		puts "What cohort are they on?"
+		cohort = gets.chomp
+		cohort.to_sym
 		puts "What is their GitHub username?"
 		git = gets.chomp
-		students << {:name => name, :cohort => :september, :git => git}
+		students << {:name => name, :cohort => cohort, :git => git}
 		puts "Now we have #{students.length} students"
 		# get another name from the user
 		name = gets.chomp
@@ -27,6 +30,17 @@ end
 def print_out(students)
 	students.each_with_index { |student, index| print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort) Git: #{student[:git]}\n" }
 end
+
+def print_out_while(students)
+
+	index = 1
+
+	while index <= students.length do
+		print "#{index}. #{students[index-1][:name]} (#{students[index-1][:cohort]} cohort)\n"
+		index += 1
+	end
+end
+
 
 def print_footer(students)
 	print "-------------\n"
@@ -51,5 +65,5 @@ end
 
 students = input_students
 print_header
-print_out(students)
+print_out_while(students)
 print_footer(students)
