@@ -1,3 +1,5 @@
+
+
 def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
@@ -10,12 +12,17 @@ def input_students
 		# add the student has to the array
 		puts "What cohort are they on?"
 		cohort = gets.chomp
-		cohort.to_sym
+			if cohort.length < 1
+				cohort = :september
+			else 
+				cohort.to_sym
+			end
 		puts "What is their GitHub username?"
 		git = gets.chomp
 		students << {:name => name, :cohort => cohort, :git => git}
 		puts "Now we have #{students.length} students"
 		# get another name from the user
+		puts "Next student please? If finished just hit return"
 		name = gets.chomp
 	end
 	# return the array of students
@@ -35,8 +42,8 @@ def print_out_while(students)
 
 	index = 1
 
-	while index <= students.length do
-		print "#{index}. #{students[index-1][:name]} (#{students[index-1][:cohort]} cohort)\n"
+	for student in students
+		print "#{index}. #{student[:name]} (#{student[:cohort]} cohort) Git: #{student[:git]}\n"
 		index += 1
 	end
 end
