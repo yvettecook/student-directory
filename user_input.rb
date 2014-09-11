@@ -24,7 +24,7 @@ def input_students
 			if cohort.length < 1
 				cohort = :september
 			else 
-				cohort.to_sym
+				cohort = cohort.to_sym
 			end
 		puts "What is their GitHub username?"
 		git = gets.chomp
@@ -43,9 +43,20 @@ def print_header
 	print "-------------\n"
 end
 
+
+def list_cohorts(students)
+	list_cohort = []
+
+	students.map { |student| list_cohort << student[:cohort] }
+
+	return list_cohort.uniq!
+end
+
+
 def print_out(students)
 	students.each_with_index { |student, index| print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort) Git: #{student[:git]}\n" }
 end
+
 
 def print_out_while(students)
 
@@ -57,14 +68,21 @@ def print_out_while(students)
 	end
 end
 
-def list_cohorts(students)
 
-	list_cohort = []
+def print_sorted_cohort(students)
 
-	students.map { |student| list_cohort << student[:cohort] }
+	cohorts = list_cohorts(students)
 
-	puts list_cohort.uniq
+	cohorts.each { |month|
+		puts "#{month.upcase} COHORT:"
 
+		students.each { |student| 
+			if student[:cohort] == month
+				puts "#{student[:name]} (#{student[:cohort]} cohort) Git: #{student[:git]}\n"
+			end
+		}
+		puts "------------"
+	}
 end
 
 
@@ -73,6 +91,7 @@ def print_footer(students)
 	print "Overall, we have #{students.length} great students\n"
 end
 
+
 def print_a(students)
 	students.each { |student| 
 		if student[:name].start_with?('A')
@@ -80,6 +99,7 @@ def print_a(students)
 		end	
 	}
 end
+
 
 def print_less_than_12(students)
 	students.each { |student| 
@@ -93,4 +113,4 @@ students = input_students
 #print_header
 #print_out_while(students)
 #print_footer(students)
-list_cohorts(students)
+print_sorted_cohort(students)
