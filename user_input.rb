@@ -1,16 +1,6 @@
-
-
 def input_students
 
-	students = [
-	{:name => "Nicole Pell", :cohort => :september, :git => "NicolePell"},
-	{:name => "Bernard Mordan", :cohort => :september, :git => "bmordan"},
-	{:name => "Elena Garrone", :cohort => :september, :git => "elenagarrone"},
-	{:name => "Yvette Cook", :cohort => :october, :git => "yvettecook"},
-	{:name => "Stephen Giles", :cohort => :october, :git => "HatStephen"}, 
-	{:name => "Ana Nogal", :cohort => :october, :git => "ananogal"},
-	{:name => "Tim Scully", :cohort => :november, :git => "Scully87"}
-]
+	students = []
 
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
@@ -29,7 +19,15 @@ def input_students
 		puts "What is their GitHub username?"
 		git = gets.chomp
 		students << {:name => name, :cohort => cohort, :git => git}
-		puts "Now we have #{students.length} students"
+
+		if students.length < 1
+			abort("No students")
+		elsif students.length == 1
+			puts "Now we have #{students.length} student"
+		else
+			puts "Now we have #{students.length} students"
+		end
+
 		# get another name from the user
 		puts "Next student please? If finished just hit return"
 		name = gets.chomp
@@ -73,12 +71,12 @@ def print_sorted_cohort(students)
 
 	cohorts = list_cohorts(students)
 
-	cohorts.each { |month|
+		cohorts.each { |month|
 		puts "#{month.upcase} COHORT:"
 
 		students.each { |student| 
 			if student[:cohort] == month
-				puts "#{student[:name]} (#{student[:cohort]} cohort) Git: #{student[:git]}\n"
+				puts "#{student[:name]}, Git: #{student[:git]}\n"
 			end
 		}
 		puts "------------"
@@ -109,8 +107,14 @@ def print_less_than_12(students)
 	}
 end
 
+
 students = input_students
-#print_header
-#print_out_while(students)
-#print_footer(students)
-print_sorted_cohort(students)
+
+if students.length > 0
+	print_header
+	print_sorted_cohort(students)
+	print_footer(students)
+
+else
+	puts "No students, fuck off"
+end
