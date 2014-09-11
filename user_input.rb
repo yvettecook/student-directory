@@ -1,7 +1,35 @@
-def input_students
-
+def interactive_menu
 	students = []
+	loop do
+		# 1. print the menu ad ask the user what to do
+		puts "Options available:"
+		puts "1. Input the students"
+		puts "2. Show the students"
+		puts "9. Exit"
+		# 2. read the input and save it into a variable
+		selection = gets.chomp
+		# 3. do what the user has asked
+		case selection
+		when "1"
+			students = input_students
+		when "2"
+			if students.length > 0
+				print_header
+				print_sorted_cohort(students)
+				print_footer(students)
+			else
+				puts "No students, please input students (Option 1)"
+			end
+		when "9"
+			exit
+		else
+			puts "I don't know what you meant, try again"
+		end
+	end
+end
 
+def input_students
+	students = []
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
 	# get the first name
@@ -20,9 +48,7 @@ def input_students
 		git = gets.chomp
 		students << {:name => name, :cohort => cohort, :git => git}
 
-		if students.length < 1
-			abort("No students")
-		elsif students.length == 1
+		if students.length == 1
 			puts "Now we have #{students.length} student"
 		else
 			puts "Now we have #{students.length} students"
@@ -108,13 +134,5 @@ def print_less_than_12(students)
 end
 
 
-students = input_students
+interactive_menu
 
-if students.length > 0
-	print_header
-	print_sorted_cohort(students)
-	print_footer(students)
-
-else
-	puts "No students, fuck off"
-end
