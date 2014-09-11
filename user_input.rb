@@ -1,10 +1,19 @@
 
 
 def input_students
+
+	students = [
+	{:name => "Nicole Pell", :cohort => :september, :git => "NicolePell"},
+	{:name => "Bernard Mordan", :cohort => :september, :git => "bmordan"},
+	{:name => "Elena Garrone", :cohort => :september, :git => "elenagarrone"},
+	{:name => "Yvette Cook", :cohort => :october, :git => "yvettecook"},
+	{:name => "Stephen Giles", :cohort => :october, :git => "HatStephen"}, 
+	{:name => "Ana Nogal", :cohort => :october, :git => "ananogal"},
+	{:name => "Tim Scully", :cohort => :november, :git => "Scully87"}
+]
+
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
-	# create an empty array
-	students = []
 	# get the first name
 	name = gets.chomp
 	# while the name is not empty, repeat this code
@@ -48,6 +57,16 @@ def print_out_while(students)
 	end
 end
 
+def list_cohorts(students)
+
+	list_cohort = []
+
+	students.map { |student| list_cohort << student[:cohort] }
+
+	puts list_cohort.uniq
+
+end
+
 
 def print_footer(students)
 	print "-------------\n"
@@ -71,6 +90,7 @@ def print_less_than_12(students)
 end
 
 students = input_students
-print_header
-print_out_while(students)
-print_footer(students)
+#print_header
+#print_out_while(students)
+#print_footer(students)
+list_cohorts(students)
