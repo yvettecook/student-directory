@@ -21,6 +21,7 @@ def print_menu
 	puts "Options available:"
 	puts "1. Input the students"
 	puts "2. Show the students"
+	puts "3. Save students"
 	puts "9. Exit"
 end
 
@@ -40,6 +41,8 @@ def process(selection)
 			students = input_students
 		when "2"
 			show_students
+		when "3"
+			save_students
 		when "9"
 			exit
 		else
@@ -116,6 +119,18 @@ end
 def print_footer
 	print "Overall, we have #{@students.length} great students\n"
 	print "------------\n"
+end
+
+def save_students
+	# open the file for writing
+	file = File.open("students.csv", "w")
+	# iterate over the array of students
+	@students.each { |student| 
+		student_data = [student[:name], student[:cohort], student[:git]]
+		csv_line = student_data.join(",")
+		file.puts csv_line
+	}
+	file.close
 end
 
 
