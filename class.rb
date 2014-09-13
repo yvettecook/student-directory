@@ -5,8 +5,14 @@ class Person
 		@cohort = :september 
 		@git = "no git username supplied"
 	end
+  
+  def to_s
+    return "Name = #{@name}\tcohort = #{@cohort}\tgit = #{@git}"  
+  end
+end
 
-	def input_students
+
+def input_students
 		puts "Please enter the names of the students"
 		puts "To finish, just hit return twice"
 		#create empty array"
@@ -18,13 +24,15 @@ class Person
 			cohort.to_sym
 			puts "What is their GitHub username?"
 			git = gets.chomp
-			students << Person.new(name, cohort, git)
+			students = students << Person.new(name, cohort, git)
 			puts "Now we have #{students.length} students"
 			name = gets.chomp
 		end
-		students
-	end
-
+	students
+end
+students = input_students
+for student in students
+  puts student
 end
 
 
