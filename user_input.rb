@@ -1,11 +1,11 @@
 @students = []
 
 def interactive_menu
-		loop do
+		loop do	
 		# 1. print the menu ad ask the user what to do
 		print_menu
 		# 2. read the input and save it into a variable & 3. do what the user has asked
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end
 end
 
@@ -50,19 +50,19 @@ def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
 	# get the first name
-	name = gets.chomp
+	name = STDIN.gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student has to the array
 		puts "What cohort are they on?"
-		cohort = gets.chomp
+		cohort = STDIN.gets.chomp
 			if cohort.length < 1
 				cohort = :september
 			else 
 				cohort = cohort.to_sym
 			end
 		puts "What is their GitHub username?"
-		git = gets.chomp
+		git = STDIN.gets.chomp
 		@students << {:name => name, :cohort => cohort, :git => git}
 
 		if @students.length == 1
@@ -73,7 +73,7 @@ def input_students
 
 		# get another name from the user
 		puts "Next student please? If finished just hit return"
-		name = gets.chomp
+		name = STDIN.gets.chomp
 	end
 	# return the array of students
 	@students
@@ -97,10 +97,8 @@ end
 def print_sorted_cohort
 
 	cohorts = list_cohorts
-
 		cohorts.each { |month|
 		puts "#{month.upcase} COHORT:"
-
 		@students.each { |student| 
 			if student[:cohort] == month
 				puts "#{student[:name]}, Git: #{student[:git]}\n"
@@ -129,8 +127,8 @@ def save_students
 	puts "List saved"
 end
 
-def load_students
-	file = File.open("students.csv", "r")
+def load_students (filename = "students.csv")
+	file = File.open(filename, "r")
 	file.readlines.each { |line| 
 	name, cohort, git = line.chomp.split(',')
 		@students << {:name => name, :cohort => cohort.to_sym, :git => git}
@@ -139,6 +137,18 @@ def load_students
 	puts "List loaded"
 end
 
+def try_load_students
+	filename = ARGV.first
+	return if filename.nil? 
+	if File.exists?(filename)
+		load_students(filename)
+		puts "Loaded #{@students.length} from #{filename}"
+	else
+		puts "Sorry, #{filename} doesn't exisit"
+		exit
+	end
+end
 
+try_load_students
 interactive_menu
 
