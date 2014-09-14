@@ -1,12 +1,4 @@
-@students = [
-  {:name => "Nicole Pell", :cohort => :september, :git => "NicolePell"},
-  {:name => "Bernard Mordan", :cohort => :september, :git => "bmordan"},
-  {:name => "Elena Garrone", :cohort => :september, :git => "elenagarrone"},
-  {:name => "Yvette Cook", :cohort => :october, :git => "yvettecook"},
-  {:name => "Stephen Giles", :cohort => :october, :git => "HatStephen"}, 
-  {:name => "Ana Nogal", :cohort => :october, :git => "ananogal"},
-  {:name => "Tim Scully", :cohort => :november, :git => "Scully87"}
-]
+@students = []
 
 def interactive_menu
 		loop do
@@ -21,7 +13,8 @@ def print_menu
 	puts "Options available:"
 	puts "1. Input the students"
 	puts "2. Show the students"
-	puts "3. Save students"
+	puts "3. Save the list to students.csv"
+	puts "4. Load the list from students.csv"
 	puts "9. Exit"
 end
 
@@ -43,6 +36,8 @@ def process(selection)
 			show_students
 		when "3"
 			save_students
+		when "4"
+			load_students
 		when "9"
 			exit
 		else
@@ -131,6 +126,17 @@ def save_students
 		file.puts csv_line
 	}
 	file.close
+	puts "List saved"
+end
+
+def load_students
+	file = File.open("students.csv", "r")
+	file.readlines.each { |line| 
+	name, cohort, git = line.chomp.split(',')
+		@students << {:name => name, :cohort => cohort.to_sym, :git => git}
+	}
+	file.close
+	puts "List loaded"
 end
 
 
