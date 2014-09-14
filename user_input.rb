@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 def interactive_menu
@@ -30,12 +31,12 @@ end
 
 def process(selection)
 	case selection
-		when "1"
+		when "1" 
 			students = input_students
 		when "2"
 			show_students
 		when "3"
-			save_students
+			save_student_csv
 		when "4"
 			load_students
 		when "9"
@@ -53,31 +54,37 @@ def input_students
 	name = STDIN.gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		# add the student has to the array
-		puts "What cohort are they on?"
-		cohort = STDIN.gets.chomp
-			if cohort.length < 1
-				cohort = :september
-			else 
-				cohort = cohort.to_sym
-			end
-		puts "What is their GitHub username?"
-		git = STDIN.gets.chomp
-		@students << {:name => name, :cohort => cohort, :git => git}
-
-		if @students.length == 1
-			puts "Now we have #{@students.length} student"
-		else
-			puts "Now we have #{@students.length} students"
-		end
-
-		# get another name from the user
+		new_student(name)
+		student_count
 		puts "Next student please? If finished just hit return"
 		name = STDIN.gets.chomp
 	end
 	# return the array of students
 	@students
 end
+
+def new_student(name, cohort = :september)
+	puts "What cohort are they on?"
+	cohort = STDIN.gets.chomp
+		if cohort.length < 1
+			cohort = :september
+		else 
+			cohort = cohort.to_sym
+		end
+	puts "What is their GitHub username?"
+	git = STDIN.gets.chomp
+	add_students_to_array(name, cohort, git)
+end
+
+
+def student_count
+	if @students.length == 1
+			puts "Now we have #{@students.length} student"
+	else
+			puts "Now we have #{@students.length} students"
+	end
+end	
+
 
 def print_header
 	print "The students of my cohort of Makers Academy\n"
@@ -87,15 +94,12 @@ end
 
 def list_cohorts
 	list_cohort = []
-
 	@students.map { |student| list_cohort << student[:cohort] }
-
 	return list_cohort.uniq!
 end
 
 
 def print_sorted_cohort
-
 	cohorts = list_cohorts
 		cohorts.each { |month|
 		puts "#{month.upcase} COHORT:"
@@ -114,24 +118,25 @@ def print_footer
 	print "------------\n"
 end
 
-def save_students
-	# open the file for writing
-	file = File.open("students.csv", "w")
-	# iterate over the array of students
+def save_student_csv 
+	CSV.open("student_list.csv", "wb") do |csv|
 	@students.each { |student| 
-		student_data = [student[:name], student[:cohort], student[:git]]
-		csv_line = student_data.join(",")
-		file.puts csv_line
+		csv << [student[:name], student[:cohort], student[:git]]
 	}
+	end
 	file.close
 	puts "List saved"
+end
+
+def add_students_to_array(name,cohort, git)
+	@students << {:name => name, :cohort => cohort.to_sym, :git => git}
 end
 
 def load_students (filename = "students.csv")
 	file = File.open(filename, "r")
 	file.readlines.each { |line| 
 	name, cohort, git = line.chomp.split(',')
-		@students << {:name => name, :cohort => cohort.to_sym, :git => git}
+		add_students_to_array(name, cohort, git)
 	}
 	file.close
 	puts "List loaded"
