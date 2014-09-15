@@ -35,6 +35,7 @@ def print_out(students)
 	students.each_with_index { |student, index| print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)\n" }
 end
 
+
 def print_footer(students)
 	print "-------------\n"
 	print "Overall, we have #{students.length} great students\n"
@@ -56,10 +57,10 @@ def print_less_than_12(students)
 	}
 end
 
-#print_header
-#print_out(students)
-#print_footer(students)
-#print_a(students)
+print_header
+print_out(students)
+print_footer(students)
+print_a(students)
 print_less_than_12(students)
 
 
