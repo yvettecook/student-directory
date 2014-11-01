@@ -50,7 +50,7 @@ While loops:
 
 Case statements:
 	
-	```
+	ruby
 	def process(selection)
 	 case selection
 		 when "1" 
@@ -65,8 +65,8 @@ Case statements:
 			 exit
 		 else
 			 puts "I don't know what you meant, try again"
-		end
 	end
-	```
+end
+```
 
 
