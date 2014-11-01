@@ -35,7 +35,7 @@ Choose from the command-line menu options:
 
 While loops:
 
-	```ruby
+	```
 	while !name.empty? do
 		puts "What cohort are they one?"
 		cohort = gets.chomp
@@ -50,7 +50,7 @@ While loops:
 
 Case statements:
 	
-	ruby
+	
 	def process(selection)
 	 case selection
 		 when "1" 
@@ -65,8 +65,8 @@ Case statements:
 			 exit
 		 else
 			 puts "I don't know what you meant, try again"
+	 end
 	end
-end
-```
+
 
 
