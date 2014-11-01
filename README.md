@@ -35,20 +35,20 @@ Choose from the command-line menu options:
 
 While loops:
 
-```ruby
-while !name.empty? do
-			puts "What cohort are they one?"
-			cohort = gets.chomp
-			cohort.to_sym
-			puts "What is their GitHub username?"
-			git = gets.chomp
-			students = students << Person.new(name, cohort, git)
-			puts "Now we have #{students.length} students"
-			name = gets.chomp
+	```ruby
+	while !name.empty? do
+		puts "What cohort are they one?"
+		cohort = gets.chomp
+		cohort.to_sym
+		puts "What is their GitHub username?"
+		git = gets.chomp
+		students = students << Person.new(name, cohort, git)
+		puts "Now we have #{students.length} students"
+		name = gets.chomp
 	end
 	```
-	
-	Case statements:
+
+Case statements:
 	
 	```ruby
 	def process(selection)
