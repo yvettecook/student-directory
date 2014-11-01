@@ -35,7 +35,7 @@ Choose from the command-line menu options:
 
 While loops:
 
-	```
+
 	while !name.empty? do
 		puts "What cohort are they one?"
 		cohort = gets.chomp
@@ -46,7 +46,7 @@ While loops:
 		puts "Now we have #{students.length} students"
 		name = gets.chomp
 	end
-	```
+
 
 Case statements:
 	
